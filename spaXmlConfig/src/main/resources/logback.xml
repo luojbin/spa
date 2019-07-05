@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration debug="true">
+    <appender name="ca" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date %-25([%thread]) %highlight(%-5level) %30(%logger{20}:%line) - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="ca" />
+    </root>
+</configuration>
