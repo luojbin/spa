@@ -1,6 +1,6 @@
-package com.loyofo.spa.java.controller;
+package com.loyofo.spa.java.controller.extra;
 
-import com.loyofo.spa.java.entity.Person;
+import com.loyofo.spa.java.entity.Spittle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -34,9 +34,9 @@ public class ParamController {
      */
     @RequestMapping("/person")
     @ResponseBody
-    public String queryPerson(Person person) {
-        log.info("获取请求参数, person={}", person);
-        return "person ok";
+    public String queryPerson(Spittle spittle) {
+        log.info("获取请求参数, spittle={}", spittle);
+        return "spittle ok";
     }
 
     /**
@@ -65,10 +65,15 @@ public class ParamController {
         return "form";
     }
 
+    /**
+     * 若表单没有通过 action 指定提交地址, 默认提交给显示表单的地址
+     * 即通过同一请求路径, get 方法获取表单, post 方法提交表单
+     */
     @RequestMapping(value = "form", method = RequestMethod.POST)
-    public String submitForm(String name, int age, String address) {
-        log.info("表单提交参数: name={}, age={}, address={}", name, age, address);
-        return "javahome";
+    public String submitForm(Spittle spittle) {
+        log.info("表单提交参数: spittle={}", spittle);
+        // 若返回的视图名前缀为 redirect: , 则会给浏览器返回一个重定向响应, 让浏览器请求指定地址
+        return "redirect:/home/viewname";
     }
 
 }

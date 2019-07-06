@@ -24,6 +24,10 @@
             <artifactId>javax.servlet.jsp-api</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
 
         <!-- spring mvc -->
         <dependency>

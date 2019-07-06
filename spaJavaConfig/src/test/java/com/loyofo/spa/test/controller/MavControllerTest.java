@@ -1,7 +1,9 @@
 package com.loyofo.spa.test.controller;
 
 import com.loyofo.spa.java.controller.HomeController;
-import com.loyofo.spa.java.dao.MsgRepository;
+import com.loyofo.spa.java.controller.extra.MavController;
+import com.loyofo.spa.java.dao.SpittleRepository;
+import com.loyofo.spa.java.entity.Spittle;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,33 +15,18 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class HomeControllerTest {
-    @Test
-    public void testHomePojo() {
-        HomeController controller = new HomeController(null);
-        Assert.assertEquals("javahome", controller.home());
-    }
-
-    @Test
-    public void testHomeMock() throws Exception {
-        HomeController controller = new HomeController(null);
-        // MockMvcBuilders.standaloneSetup, 独立地启动某个 controller
-        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
-        // MockMvcRequestBuilders 模拟发起请求
-        mockMvc.perform(MockMvcRequestBuilders.post("/home/viewname"))
-                // MockMvcResultMatchers 结果比对
-                .andExpect(MockMvcResultMatchers.view().name("javahome"));
-    }
+public class MavControllerTest {
 
     @Test
     public void testGetMsgAndModel() throws Exception {
-        List<String> expectedMsg = getMsg(20);
-        MsgRepository mockRepository = Mockito.mock(MsgRepository.class);
-        Mockito.when(mockRepository.getMessage(Long.MAX_VALUE, 20)).thenReturn(expectedMsg);
+        List<Spittle> expectedMsg = getSpittleList(20);
+        SpittleRepository mockRepository = Mockito.mock(SpittleRepository.class);
+        Mockito.when(mockRepository.findSpittles(Long.MAX_VALUE, 20)).thenReturn(expectedMsg);
 
-        HomeController controller = new HomeController(mockRepository);
+        MavController controller = new MavController(mockRepository);
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller)
                 .setSingleView(new InternalResourceView("/WEB-INF/views/msg.jsp"))
                 .build();
@@ -51,11 +38,11 @@ public class HomeControllerTest {
     }
     @Test
     public void testGetMsgAndModelWithName() throws Exception {
-        List<String> expectedMsg = getMsg(20);
-        MsgRepository mockRepository = Mockito.mock(MsgRepository.class);
-        Mockito.when(mockRepository.getMessage(Long.MAX_VALUE, 20)).thenReturn(expectedMsg);
+        List<Spittle> expectedMsg = getSpittleList(20);
+        SpittleRepository mockRepository = Mockito.mock(SpittleRepository.class);
+        Mockito.when(mockRepository.findSpittles(Long.MAX_VALUE, 20)).thenReturn(expectedMsg);
 
-        HomeController controller = new HomeController(mockRepository);
+        MavController controller = new MavController(mockRepository);
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller)
                 .setSingleView(new InternalResourceView("/WEB-INF/views/msg.jsp"))
                 .build();
@@ -67,11 +54,11 @@ public class HomeControllerTest {
     }
     @Test
     public void testGetMsgAndMap() throws Exception {
-        List<String> expectedMsg = getMsg(20);
-        MsgRepository mockRepository = Mockito.mock(MsgRepository.class);
-        Mockito.when(mockRepository.getMessage(Long.MAX_VALUE, 20)).thenReturn(expectedMsg);
+        List<Spittle> expectedMsg = getSpittleList(20);
+        SpittleRepository mockRepository = Mockito.mock(SpittleRepository.class);
+        Mockito.when(mockRepository.findSpittles(Long.MAX_VALUE, 20)).thenReturn(expectedMsg);
 
-        HomeController controller = new HomeController(mockRepository);
+        MavController controller = new MavController(mockRepository);
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller)
                 .setSingleView(new InternalResourceView("/WEB-INF/views/msg.jsp"))
                 .build();
@@ -83,11 +70,11 @@ public class HomeControllerTest {
     }
     @Test
     public void testGetMsg() throws Exception {
-        List<String> expectedMsg = getMsg(20);
-        MsgRepository mockRepository = Mockito.mock(MsgRepository.class);
-        Mockito.when(mockRepository.getMessage(Long.MAX_VALUE, 20)).thenReturn(expectedMsg);
+        List<Spittle> expectedMsg = getSpittleList(20);
+        SpittleRepository mockRepository = Mockito.mock(SpittleRepository.class);
+        Mockito.when(mockRepository.findSpittles(Long.MAX_VALUE, 20)).thenReturn(expectedMsg);
 
-        HomeController controller = new HomeController(mockRepository);
+        MavController controller = new MavController(mockRepository);
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller)
                 .setSingleView(new InternalResourceView("/WEB-INF/views/msg.jsp"))
                 .build();
@@ -98,11 +85,11 @@ public class HomeControllerTest {
 
     }
 
-    private List<String> getMsg(int count) {
-        List<String> msgs = new ArrayList<>(20);
-        for(int i = 0; i< count; i++) {
-            msgs.add("测试消息: " + i);
+    private List<Spittle> getSpittleList(int count) {
+        List<Spittle> list = new ArrayList<>(20);
+        for (int i = 0; i < count; i++) {
+            list.add(new Spittle("测试消息 Spittle" + i, new Date()));
         }
-        return msgs;
+        return list;
     }
 }
