@@ -12,13 +12,13 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * model and view 不同情况的附加测试, 有以下几种类型
+ * model and view 不同情况的附加测试, 有以下几种类型, 都能完成
  *
  * 1. model 入参, 返回视图名
- * 2. model 入参, 不返回视图名
+ * 2. model 入参, 不返回视图名, 则视图名等于请求名
  * 3. map 入参, 返回视图名
- * 4. map 入参, 不返回视图名
- * 5. 无入参, 直接返会数据
+ * 4. map 入参, 不返回视图名, 则视图名等于请求名
+ * 5. 无入参, 直接返回数据, 则视图名等于请求名
  * 6. 无入参, 返回 ModelAndView
  */
 @RequestMapping("/mav")

@@ -1,17 +1,18 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
   <head>
-    <title>form 表单提交</title>
+    <title>spittr 注册</title>
   </head>
   <body>
-    <h1>hello 表单提交</h1>
+    <h1>欢迎注册 spittr</h1>
 
     <div>
       <form method="post">
-        姓名:<input type="text" name="name"/><br />
-        年龄:<input type="text" name="age"/><br />
-        地址:<input type="text" name="address"/><br />
-        <input type="submit" value="提交" />
+        姓氏:<input type="text" name="firstName"/><br />
+        名字:<input type="text" name="lastName"/><br />
+        用户名:<input type="text" name="username"/><br />
+        密码:<input type="password" name="password"/><br />
+        <input type="submit" value="注册" />
       </form>
     </div>
   </body>

@@ -1,12 +1,17 @@
 package com.loyofo.spa.test.controller;
 
 import com.loyofo.spa.java.controller.HomeController;
+import com.loyofo.spa.java.controller.SpitterController;
 import com.loyofo.spa.java.controller.SpittleController;
+import com.loyofo.spa.java.dao.SpitterRepository;
 import com.loyofo.spa.java.dao.SpittleRepository;
+import com.loyofo.spa.java.entity.Spitter;
 import com.loyofo.spa.java.entity.Spittle;
+import com.sun.deploy.panel.SpecialTableRenderer;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -114,6 +119,49 @@ public class SpittrControllerTest {
                 .andExpect(MockMvcResultMatchers.view().name("spittles"))
                 .andExpect(MockMvcResultMatchers.model().attributeExists("spittleList"))
                 .andExpect(MockMvcResultMatchers.model().attribute("spittleList", Matchers.hasItems(expectedMsg.toArray())));
+    }
+
+    @Test
+    public void testShowSpittle() throws Exception {
+        long testSpittleId = 12345;
+        Spittle spittle = new Spittle("测试消息 spittle", new Date());
+        SpittleRepository mockRepository = Mockito.mock(SpittleRepository.class);
+        Mockito.when(mockRepository.findOne(testSpittleId)).thenReturn(spittle);
+
+        SpittleController controller = new SpittleController(mockRepository);
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        mockMvc.perform(MockMvcRequestBuilders.get("/spittle/" + testSpittleId))
+                .andExpect(MockMvcResultMatchers.view().name("spittle"))
+                .andExpect(MockMvcResultMatchers.model().attributeExists("spittle"))
+                .andExpect(MockMvcResultMatchers.model().attribute("spittle", spittle));
+    }
+
+    @Test
+    public void testGetForm() throws Exception {
+        SpitterController controller = new SpitterController(null);
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        mockMvc.perform(MockMvcRequestBuilders.get("/spitter/register"))
+                .andExpect(MockMvcResultMatchers.view().name("form"));
+    }
+
+    @Test
+    public void testSubmitForm() throws Exception {
+        Spitter unsaved = new Spitter("张", "三丰", "zs", "123456");
+        Spitter saved = new Spitter(24L, "张", "三丰", "zs", "123456");
+
+        SpitterRepository mockRepository = Mockito.mock(SpitterRepository.class);
+        Mockito.when(mockRepository.save(unsaved)).thenReturn(saved);
+
+        SpitterController controller = new SpitterController(mockRepository);
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/spitter/register")
+                .param("firstName", "张")
+                .param("lastName", "三丰")
+                .param("username", "zs")
+                .param("password", "123456"))
+                .andExpect(MockMvcResultMatchers.redirectedUrl("/spitter/zs"));
+        Mockito.verify(mockRepository, Mockito.atLeastOnce()).save(unsaved);
     }
 
     private List<Spittle> getSpittleList(int count) {
