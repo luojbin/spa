@@ -7,11 +7,7 @@
         </encoder>
     </appender>
 
-    <logger>
-        <appender-ref ref="ca" />
-    </logger>
-
-    <root level="info">
+    <root level="all">
         <appender-ref ref="ca" />
     </root>
 </configuration>

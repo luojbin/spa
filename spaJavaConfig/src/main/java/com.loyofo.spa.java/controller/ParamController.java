@@ -1,8 +1,6 @@
 package com.loyofo.spa.java.controller;
 
 import com.loyofo.spa.java.entity.Person;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 public class ParamController {
 
     private static final Logger log = LoggerFactory.getLogger(ParamController.class);
-    public static final Log jclLog = LogFactory.getLog(ParamController.class);
     /**
      * 对于查询参数, 可以直接获取, 也可以通过 @RequestParam 标记
      * 如果前端提交的参数名, 与方法形参的名字不同, 可以用注解 @RequestParam 的 value 属性指定别名
@@ -70,7 +67,7 @@ public class ParamController {
 
     @RequestMapping(value = "form", method = RequestMethod.POST)
     public String submitForm(String name, int age, String address) {
-        log.info(": name={}, age={}, address={}", name, age, address); //StringBuilder
+        log.info("表单提交参数: name={}, age={}, address={}", name, age, address);
         return "javahome";
     }
 
