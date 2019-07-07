@@ -51,7 +51,11 @@ public class SpitterControllerTest {
     SpitterController controller = new SpitterController(mockRepository);
     MockMvc mockMvc = standaloneSetup(controller).build();
     
-    mockMvc.perform(post("/spitter/register"))
+    mockMvc.perform(post("/spitter/register")
+            .param("firstName", "1")
+            .param("lastName", "2")
+            .param("username", "3")
+    )
         .andExpect(status().isOk())
         .andExpect(view().name("registerForm"))
         .andExpect(model().errorCount(5))

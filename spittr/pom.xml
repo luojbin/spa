@@ -11,6 +11,7 @@
 
     <properties>
         <activeMQ.Version>5.7.0</activeMQ.Version>
+        <el.impl.version>2.2.4</el.impl.version>
         <aspectJ.Version>1.7.2</aspectJ.Version>
         <commonsLang.Version>3.1</commonsLang.Version>
         <ehcache.Version>2.7.4</ehcache.Version>
@@ -22,7 +23,7 @@
         <hibernateValidator.Version>5.0.1.Final</hibernateValidator.Version>
         <jackson.Version>2.4.3</jackson.Version>
         <javaxMail.Version>1.4.7</javaxMail.Version>
-        <jspApi.Version>2.1</jspApi.Version>
+        <jspApi.Version>2.2</jspApi.Version>
         <jspEl.Version>2.2.4</jspEl.Version>
         <jstl.Version>1.2</jstl.Version>
         <junit.Version>4.11</junit.Version>
@@ -67,6 +68,11 @@
                 <artifactId>javax.el-api</artifactId>
                 <version>${jspEl.Version}</version>
                 <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.web</groupId>
+                <artifactId>javax.el</artifactId>
+                <version>${el.impl.version}</version>
             </dependency>
 
             <!-- spring mvc -->

@@ -7,13 +7,13 @@ import com.loyofo.spa.java.dao.SpitterRepository;
 import com.loyofo.spa.java.dao.SpittleRepository;
 import com.loyofo.spa.java.entity.Spitter;
 import com.loyofo.spa.java.entity.Spittle;
-import com.sun.deploy.panel.SpecialTableRenderer;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.RequestBuilder;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -22,6 +22,11 @@ import org.springframework.web.servlet.view.InternalResourceView;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+
 
 /**
  * 通过 junit + mock 测试 mvc 组件功能, 使用 mock 测试的大致流程如下
@@ -146,8 +151,37 @@ public class SpittrControllerTest {
 
     @Test
     public void testSubmitForm() throws Exception {
-        Spitter unsaved = new Spitter("张", "三丰", "zs", "123456");
-        Spitter saved = new Spitter(24L, "张", "三丰", "zs", "123456");
+        String username = "zsaul";
+
+        Spitter unsaved = new Spitter(username, "123456","zhang", "san");
+        Spitter saved = new Spitter(24L, username, "123456","zhang", "san");
+
+        SpitterRepository mockRepository = Mockito.mock(SpitterRepository.class);
+        Mockito.when(mockRepository.save(unsaved)).thenReturn(saved);
+
+        SpitterController controller = new SpitterController(mockRepository);
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/spitter/register")
+                .param("firstName", "zhang")
+                .param("lastName", "san")
+                .param("username", username)
+                .param("password", "123456");
+
+        System.out.println(">>>>>>>>>>>>>>>>>请求已构建");
+        ResultActions resultActions = mockMvc.perform(requestBuilder);
+        System.out.println(">>>>>>>>>>>>>>>>>请求已执行");
+
+        resultActions.andExpect(MockMvcResultMatchers.redirectedUrl("/spitter/" + username));
+        // 校验是否执行过
+        // Mockito.verify(mockRepository, Mockito.atLeastOnce()).save(unsaved);
+    }
+    @Test
+    public void testSubmitFormWithError() throws Exception {
+        String username = "zgan";
+
+        Spitter unsaved = new Spitter(username, "123456", "zhang", "san");
+        Spitter saved = new Spitter(24L, username, "123456", "zhang", "san");
 
         SpitterRepository mockRepository = Mockito.mock(SpitterRepository.class);
         Mockito.when(mockRepository.save(unsaved)).thenReturn(saved);
@@ -156,33 +190,16 @@ public class SpittrControllerTest {
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
         mockMvc.perform(MockMvcRequestBuilders.post("/spitter/register")
-                .param("firstName", "张")
-                .param("lastName", "三丰")
-                .param("username", "zs")
-                .param("password", "123456"))
-                .andExpect(MockMvcResultMatchers.redirectedUrl("/spitter/zs"));
-        // 校验是否执行过
-        Mockito.verify(mockRepository, Mockito.atLeastOnce()).save(unsaved);
-    }
-    @Test
-    public void testSubmitFormWithError() throws Exception {
-        Spitter unsaved = new Spitter("张", "三丰", "zs", "123456");
-        Spitter saved = new Spitter(24L, "张", "三丰", "zs", "123456");
-
-        SpitterRepository mockRepository = Mockito.mock(SpitterRepository.class);
-        Mockito.when(mockRepository.save(unsaved)).thenReturn(saved);
-
-        SpitterController controller = new SpitterController(mockRepository);
-        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
-
-        mockMvc.perform(MockMvcRequestBuilders.post("/spitter/register"))
-                // .param("firstName", "张")
-                // .param("lastName", "三丰")
-                // .param("username", "zs")
-                // .param("password", "123456"))
-                .andExpect(MockMvcResultMatchers.view().name("form"));
-        // 校验是否执行过
-        Mockito.verify(mockRepository, Mockito.atLeastOnce()).save(unsaved);
+                .param("firstName", "1")
+                .param("lastName", "2")
+                .param("username", "3")
+                .param("password", "4")
+        )
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("form"))
+                .andExpect(model().errorCount(4))
+                .andExpect(model().attributeHasFieldErrors(
+                        "spitter", "firstName", "lastName", "username", "password"));
     }
 
     private List<Spittle> getSpittleList(int count) {

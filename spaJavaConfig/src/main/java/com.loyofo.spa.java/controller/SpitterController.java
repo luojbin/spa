@@ -31,10 +31,11 @@ public class SpitterController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String submitRegistrationForm(@Valid Spitter spitter, Errors error) {
         if (error.hasErrors()) {
-            log.error("spitter 参数有误");
+            log.warn("error 校验失败, {}", error);
+            log.warn("spitter 参数有误");
             return "form";
         }
-            log.error("spitter 参数无误");
+            log.info("spitter 参数无误");
         spitterRepository.save(spitter);
         return "redirect:/spitter/" + spitter.getUsername();
     }

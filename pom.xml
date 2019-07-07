@@ -14,32 +14,78 @@
         <module>spaJavaConfig</module>
     </modules>
 
+    <properties>
+        <activeMQ.Version>5.7.0</activeMQ.Version>
+        <el.impl.version>2.2.4</el.impl.version>
+        <aspectJ.Version>1.7.2</aspectJ.Version>
+        <commonsLang.Version>3.1</commonsLang.Version>
+        <ehcache.Version>2.7.4</ehcache.Version>
+        <ehcacheJCache.Version>1.4.0-beta1</ehcacheJCache.Version>
+        <h2.Version>1.4.182</h2.Version>
+        <hamcrest.Version>1.3</hamcrest.Version>
+        <hibernate.Version>4.1.6.Final</hibernate.Version>
+        <hibernateEntityManager.Version>4.0.1.Final</hibernateEntityManager.Version>
+        <hibernateValidator.Version>5.0.1.Final</hibernateValidator.Version>
+        <jackson.Version>2.4.3</jackson.Version>
+        <javaxMail.Version>1.4.7</javaxMail.Version>
+        <jspApi.Version>2.2</jspApi.Version>
+        <jspEl.Version>2.2.4</jspEl.Version>
+        <jstl.Version>1.2</jstl.Version>
+        <junit.Version>4.11</junit.Version>
+        <log4j.Version>1.2.14</log4j.Version>
+        <mockito.Version>1.9.5</mockito.Version>
+        <servletApi.Version>3.1.0</servletApi.Version>
+        <slf4j.Version>1.7.5</slf4j.Version>
+        <springAMQP.Version>1.0.0.RELEASE</springAMQP.Version>
+        <springDataJpa.Version>1.3.2.RELEASE</springDataJpa.Version>
+        <springSecurity.Version>3.2.0.RELEASE</springSecurity.Version>
+        <spring.Version>4.0.7.RELEASE</spring.Version>
+        <springWebflow.Version>2.4.1.RELEASE</springWebflow.Version>
+        <systemRules.Version>1.5.0</systemRules.Version>
+        <thymeleaf.Version>2.1.3.RELEASE</thymeleaf.Version>
+        <tiles.Version>3.0.1</tiles.Version>
+        <gson.Version>2.8.5</gson.Version>
+        <logback.Version>1.2.3</logback.Version>
+        <slf4j.Version>1.7.25</slf4j.Version>
+    </properties>
+
     <dependencyManagement>
         <dependencies>
             <!-- servlet, jsp -->
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
-                <version>3.1.0</version>
+                <version>${servletApi.Version}</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>javax.servlet.jsp</groupId>
-                <artifactId>javax.servlet.jsp-api</artifactId>
-                <version>2.3.3</version>
+                <artifactId>jsp-api</artifactId>
+                <version>${jspApi.Version}</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>jstl</groupId>
                 <artifactId>jstl</artifactId>
-                <version>1.2</version>
+                <version>${jstl.Version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.el</groupId>
+                <artifactId>javax.el-api</artifactId>
+                <version>${jspEl.Version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.web</groupId>
+                <artifactId>javax.el</artifactId>
+                <version>${el.impl.version}</version>
             </dependency>
 
             <!-- spring mvc -->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-webmvc</artifactId>
-                <version>4.3.9.RELEASE</version>
+                <version>${spring.Version}</version>
                 <exclusions>
                     <exclusion>
                         <artifactId>commons-logging</artifactId>
@@ -48,53 +94,75 @@
                 </exclusions>
             </dependency>
 
+            <!-- JSR-303 -->
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${hibernateValidator.Version}</version>
+            </dependency>
+
             <!-- spring test -->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
-                <version>4.3.9.RELEASE</version>
+                <version>${spring.Version}</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.12</version>
+                <artifactId>junit-dep</artifactId>
+                <version>${junit.Version}</version>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>2.28.2</version>
+                <version>${mockito.Version}</version>
             </dependency>
             <dependency>
                 <groupId>org.hamcrest</groupId>
                 <artifactId>hamcrest-library</artifactId>
-                <version>1.3</version>
+                <version>${hamcrest.Version}</version>
             </dependency>
-
 
             <!-- aop -->
             <dependency>
                 <groupId>org.aspectj</groupId>
                 <artifactId>aspectjweaver</artifactId>
-                <version>1.8.9</version>
+                <version>${aspectJ.Version}</version>
             </dependency>
 
             <!-- json -->
             <dependency>
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>
-                <version>2.8.5</version>
+                <version>${gson.Version}</version>
             </dependency>
 
             <!-- slf4j + logback -->
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
-                <version>1.2.3</version>
+                <version>${logback.Version}</version>
             </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>jcl-over-slf4j</artifactId>
-                <version>1.7.25</version>
+                <version>${slf4j.Version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring.Version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.Version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commonsLang.Version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

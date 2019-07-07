@@ -19,7 +19,7 @@ public class ParamController {
     @RequestMapping("/query")
     @ResponseBody
     public String queryParam(
-            @RequestParam(name = "id", defaultValue = "默认名字=道明寺") String name,
+            @RequestParam(value = "id", defaultValue = "默认名字=道明寺") String name,
             @RequestParam(defaultValue = "20") int age,
             @RequestParam(defaultValue = "默认地址=深圳南山") String address
     ) {
