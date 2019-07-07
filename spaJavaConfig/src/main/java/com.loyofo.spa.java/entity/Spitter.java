@@ -23,7 +23,7 @@ public class Spitter {
 
     public Spitter(){}
 
-    public Spitter(Long id, String firstName, String lastName, String username, String password) {
+    public Spitter(Long id, String username, String password, String firstName, String lastName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -31,8 +31,8 @@ public class Spitter {
         this.password = password;
     }
 
-    public Spitter(String firstName, String lastName, String username, String password) {
-        this(null, firstName, lastName, username, password);
+    public Spitter(String username, String password, String firstName, String lastName) {
+        this(null, username, password, firstName, lastName);
     }
 
     public void setId(Long id) {
