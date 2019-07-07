@@ -6,8 +6,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/spitter")
@@ -26,7 +29,12 @@ public class SpitterController {
         return "form";
     }
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String submitRegistrationForm(Spitter spitter) {
+    public String submitRegistrationForm(@Valid Spitter spitter, Errors error) {
+        if (error.hasErrors()) {
+            log.error("spitter 参数有误");
+            return "form";
+        }
+            log.error("spitter 参数无误");
         spitterRepository.save(spitter);
         return "redirect:/spitter/" + spitter.getUsername();
     }

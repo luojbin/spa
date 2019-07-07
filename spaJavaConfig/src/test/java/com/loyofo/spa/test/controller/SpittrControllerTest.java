@@ -161,6 +161,27 @@ public class SpittrControllerTest {
                 .param("username", "zs")
                 .param("password", "123456"))
                 .andExpect(MockMvcResultMatchers.redirectedUrl("/spitter/zs"));
+        // 校验是否执行过
+        Mockito.verify(mockRepository, Mockito.atLeastOnce()).save(unsaved);
+    }
+    @Test
+    public void testSubmitFormWithError() throws Exception {
+        Spitter unsaved = new Spitter("张", "三丰", "zs", "123456");
+        Spitter saved = new Spitter(24L, "张", "三丰", "zs", "123456");
+
+        SpitterRepository mockRepository = Mockito.mock(SpitterRepository.class);
+        Mockito.when(mockRepository.save(unsaved)).thenReturn(saved);
+
+        SpitterController controller = new SpitterController(mockRepository);
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/spitter/register"))
+                // .param("firstName", "张")
+                // .param("lastName", "三丰")
+                // .param("username", "zs")
+                // .param("password", "123456"))
+                .andExpect(MockMvcResultMatchers.view().name("form"));
+        // 校验是否执行过
         Mockito.verify(mockRepository, Mockito.atLeastOnce()).save(unsaved);
     }
 
