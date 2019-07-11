@@ -13,11 +13,14 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+    <listener>
+        <listener-class>com.loyofo.spa.webapp.common.listener.ReqListener</listener-class>
+    </listener>
 
 
     <!-- 配置 servlet filter -->
     <filter>
-        <filter-name>myFilter</filter-name>
+        <filter-name>filter1</filter-name>
         <filter-class>com.loyofo.spa.webapp.common.filter.MyFilter</filter-class>
         <init-param>
             <param-name>name</param-name>
@@ -25,20 +28,47 @@
         </init-param>
     </filter>
     <filter-mapping>
-        <filter-name>myFilter</filter-name>
+        <filter-name>filter1</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
     <filter>
-        <filter-name>myFilter2</filter-name>
-        <filter-class>com.loyofo.spa.webapp.common.filter.MyFilter2</filter-class>
+        <filter-name>filter2</filter-name>
+        <filter-class>com.loyofo.spa.webapp.common.filter.MyFilter</filter-class>
         <init-param>
             <param-name>name</param-name>
             <param-value>filter2</param-value>
         </init-param>
     </filter>
     <filter-mapping>
-        <filter-name>myFilter2</filter-name>
+        <filter-name>filter2</filter-name>
         <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>filter3</filter-name>
+        <filter-class>com.loyofo.spa.webapp.common.filter.MyFilter</filter-class>
+        <init-param>
+            <param-name>name</param-name>
+            <param-value>filter3</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>filter3</filter-name>
+        <url-pattern>/filter3/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>filter4</filter-name>
+        <filter-class>com.loyofo.spa.webapp.common.filter.MyFilter</filter-class>
+        <init-param>
+            <param-name>name</param-name>
+            <param-value>filter4</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>filter4</filter-name>
+        <url-pattern>/filter4/*</url-pattern>
     </filter-mapping>
 
     <servlet>

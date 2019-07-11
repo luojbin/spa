@@ -1,7 +1,7 @@
 package com.loyofo.spa.java.config;
 
 import com.loyofo.spa.webapp.common.filter.MyFilter;
-import com.loyofo.spa.webapp.common.listener.ReqAttrListener;
+import com.loyofo.spa.webapp.common.listener.ReqListener;
 import org.springframework.web.WebApplicationInitializer;
 
 import javax.servlet.ServletContext;
@@ -24,6 +24,6 @@ public class ServletConfig implements WebApplicationInitializer {
                 .addMappingForUrlPatterns(null, false, "/" + filter4 + "/*" );
 
         // 添加监听器
-        servletContext.addListener(ReqAttrListener.class);
+        servletContext.addListener(ReqListener.class);
     }
 }

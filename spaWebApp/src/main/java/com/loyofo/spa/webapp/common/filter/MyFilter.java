@@ -23,7 +23,10 @@ public class MyFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
+        String initParam = filterConfig.getInitParameter("name");
+        if ("默认过滤器".equals(getName()) && initParam != null) {
+            this.name = initParam;
+        }
     }
 
     @Override
