@@ -4,6 +4,9 @@ import com.loyofo.spa.webapp.common.filter.MyFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletRegistration;
+import java.io.File;
 
 /**
  * webapp 初始化类, 取代 web.xml
@@ -74,5 +77,22 @@ public class AppConfig extends AbstractAnnotationConfigDispatcherServletInitiali
         return new Filter[]{new MyFilter("filter1"), new MyFilter("filter2")};
     }
 
-
+    /**
+     * 自定义注册, 可以设置文件上传相关参数, 相当于在 web.xml 下为 dispatcherServlet 添加以下配置
+     *
+     * <multipart-config>
+     *     <location>data/java</location>
+     * </multipart-config>
+     */
+    @Override
+    protected void customizeRegistration(ServletRegistration.Dynamic registration) {
+        // 要求文件路径已存在, 否则会报错路径无效
+        String path = "d:/data/tmp/";
+        File dir = new File(path);
+        if(!dir.exists()){
+            dir.mkdirs();
+        }
+        logger.info("临时文件夹绝对路径为: " + dir.getAbsolutePath());
+        registration.setMultipartConfig(new MultipartConfigElement(dir.getAbsolutePath()));
+    }
 }
