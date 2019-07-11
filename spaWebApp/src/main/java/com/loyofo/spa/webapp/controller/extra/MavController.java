@@ -3,6 +3,7 @@ package com.loyofo.spa.webapp.controller.extra;
 import com.loyofo.spa.webapp.dao.SpittleRepository;
 import com.loyofo.spa.webapp.entity.Spittle;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,6 +22,7 @@ import java.util.Map;
  * 5. 无入参, 直接返回数据, 则视图名等于请求名
  * 6. 无入参, 返回 ModelAndView
  */
+@Controller
 @RequestMapping("/mav")
 public class MavController {
     private SpittleRepository spittleRepository;

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 public class HelloService {
     private static Logger log = LoggerFactory.getLogger(HelloService.class);
     {
-        log.warn("HelloService bean 已创建");
+        log.info("HelloService bean 已创建");
     }
 
     public void logIt(String msg) {

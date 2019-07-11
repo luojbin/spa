@@ -8,6 +8,6 @@ import org.springframework.stereotype.Service;
 public class NoService {
     private static Logger log = LoggerFactory.getLogger(NoService.class);
     {
-        log.warn("NoService bean 已创建");
+        log.info("NoService bean 已创建");
     }
 }

@@ -1,7 +1,6 @@
 package com.loyofo.spa.java.config;
 
 import com.loyofo.spa.webapp.common.filter.MyFilter;
-import com.loyofo.spa.webapp.common.filter.MyFilter2;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
@@ -72,7 +71,7 @@ public class AppConfig extends AbstractAnnotationConfigDispatcherServletInitiali
      */
     @Override
     protected Filter[] getServletFilters() {
-        return new Filter[]{new MyFilter(), new MyFilter2()};
+        return new Filter[]{new MyFilter("filter1"), new MyFilter("filter2")};
     }
 
 

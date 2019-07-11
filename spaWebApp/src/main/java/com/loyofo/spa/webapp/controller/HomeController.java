@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 // 在类上添加路径映射, 可以用 String 数组指定多个
 @RequestMapping({"/", "/homepage"})
 public class HomeController {
+
     private static Logger log = LoggerFactory.getLogger(HomeController.class);
 
     @RequestMapping(method = RequestMethod.GET)

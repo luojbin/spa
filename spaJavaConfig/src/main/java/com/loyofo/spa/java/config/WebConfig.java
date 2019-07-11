@@ -53,15 +53,18 @@ public class WebConfig extends WebMvcConfigurerAdapter {
      *
      * 	<mvc:interceptors>
      * 		<mvc:interceptor>
-     * 		    <bean class="com.loyofo.spa.java.common.interceptor.MyInterceptor" />
      * 			<mvc:mapping path="/**"/>
+     * 		    <bean class="com.loyofo.spa.java.common.interceptor.MyInterceptor" />
      * 		</mvc:interceptor>
      * 	</mvc:interceptors>
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new MyInterceptor()).addPathPatterns("/**");
-        registry.addInterceptor(new MyInterceptor2()).addPathPatterns("/**");
+        registry.addInterceptor(new MyInterceptor())
+                .addPathPatterns("/**")
+                .addPathPatterns("/");
+        registry.addInterceptor(new MyInterceptor2())
+                .addPathPatterns("/**");
     }
 
 }
