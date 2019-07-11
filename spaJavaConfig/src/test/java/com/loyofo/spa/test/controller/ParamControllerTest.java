@@ -1,6 +1,6 @@
 package com.loyofo.spa.test.controller;
 
-import com.loyofo.spa.java.controller.extra.ParamController;
+import com.loyofo.spa.webapp.controller.extra.ParamController;
 import org.junit.Test;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;

@@ -12,6 +12,7 @@
     <modules>
         <module>spaXmlConfig</module>
         <module>spaJavaConfig</module>
+        <module>spaWebApp</module>
     </modules>
 
     <properties>

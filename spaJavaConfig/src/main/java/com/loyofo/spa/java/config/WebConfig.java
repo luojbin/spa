@@ -1,11 +1,10 @@
 package com.loyofo.spa.java.config;
 
-import com.loyofo.spa.java.common.interceptor.MyInterceptor;
-import com.loyofo.spa.java.common.interceptor.MyInterceptor2;
+import com.loyofo.spa.webapp.common.interceptor.MyInterceptor;
+import com.loyofo.spa.webapp.common.interceptor.MyInterceptor2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -20,8 +19,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Configuration
 // 对应 mvc 注解扫描 <mvc:annotation-driven/>
 @EnableWebMvc
-// 对应组件扫描 <context:component-scan base-package="com.loyofo.spa.xml.controller"/>
-@ComponentScan(basePackages="com.loyofo.spa.java.controller")
+// 对应组件扫描 <context:component-scan base-package="com.loyofo.spa.webapp.controller"/>
+@ComponentScan(basePackages="com.loyofo.spa.webapp.controller")
 public class WebConfig extends WebMvcConfigurerAdapter {
     /**
      * 配置视图解析器, 相当于在 spring-mvc.xml 中配置

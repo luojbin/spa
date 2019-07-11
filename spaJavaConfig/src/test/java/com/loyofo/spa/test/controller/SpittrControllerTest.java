@@ -1,12 +1,12 @@
 package com.loyofo.spa.test.controller;
 
-import com.loyofo.spa.java.controller.HomeController;
-import com.loyofo.spa.java.controller.SpitterController;
-import com.loyofo.spa.java.controller.SpittleController;
-import com.loyofo.spa.java.dao.SpitterRepository;
-import com.loyofo.spa.java.dao.SpittleRepository;
-import com.loyofo.spa.java.entity.Spitter;
-import com.loyofo.spa.java.entity.Spittle;
+import com.loyofo.spa.webapp.controller.HomeController;
+import com.loyofo.spa.webapp.controller.SpitterController;
+import com.loyofo.spa.webapp.controller.SpittleController;
+import com.loyofo.spa.webapp.dao.SpitterRepository;
+import com.loyofo.spa.webapp.dao.SpittleRepository;
+import com.loyofo.spa.webapp.entity.Spitter;
+import com.loyofo.spa.webapp.entity.Spittle;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Test;
@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 

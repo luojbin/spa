@@ -1,8 +1,8 @@
 package com.loyofo.spa.test.controller;
 
-import com.loyofo.spa.java.controller.extra.MavController;
-import com.loyofo.spa.java.dao.SpittleRepository;
-import com.loyofo.spa.java.entity.Spittle;
+import com.loyofo.spa.webapp.controller.extra.MavController;
+import com.loyofo.spa.webapp.dao.SpittleRepository;
+import com.loyofo.spa.webapp.entity.Spittle;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.mockito.Mockito;

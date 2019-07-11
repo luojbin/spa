@@ -1,7 +1,7 @@
 package com.loyofo.spa.java.config;
 
-import com.loyofo.spa.java.common.filter.MyFilter;
-import com.loyofo.spa.java.common.filter.MyFilter2;
+import com.loyofo.spa.webapp.common.filter.MyFilter;
+import com.loyofo.spa.webapp.common.filter.MyFilter2;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
@@ -63,7 +63,7 @@ public class AppConfig extends AbstractAnnotationConfigDispatcherServletInitiali
      *
      * 	<filter>
      * 		<filter-name>myFilter</filter-name>
-     * 		<filter-class>com.loyofo.spa.java.common.filter.MyFilter</filter-class>
+     * 		<filter-class>com.loyofo.spa.webapp.common.filter.MyFilter</filter-class>
      * 	</filter>
      * 	<filter-mapping>
      * 		<filter-name>myFilter</filter-name>
