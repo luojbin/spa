@@ -1,12 +1,14 @@
 package com.loyofo.spa.java.config;
 
 import com.loyofo.spa.webapp.common.interceptor.MyInterceptor;
-import com.loyofo.spa.webapp.common.interceptor.MyInterceptor2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
@@ -60,11 +62,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new MyInterceptor())
-                .addPathPatterns("/**")
-                .addPathPatterns("/");
-        registry.addInterceptor(new MyInterceptor2())
-                .addPathPatterns("/**");
+        registry.addInterceptor(new MyInterceptor("interceptor1"))
+                .addPathPatterns("/inter1/*");
+        registry.addInterceptor(new MyInterceptor("interceptor2"))
+                .addPathPatterns("/inter2/*");
     }
 
 }

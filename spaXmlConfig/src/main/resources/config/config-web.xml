@@ -26,12 +26,16 @@
     <!-- 添加 mvc 拦截器 -->
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <bean class="com.loyofo.spa.webapp.common.interceptor.MyInterceptor"/>
+            <mvc:mapping path="/inter1/*"/>
+            <bean class="com.loyofo.spa.webapp.common.interceptor.MyInterceptor">
+                <constructor-arg name="name" value="interceptor1"/>
+            </bean>
         </mvc:interceptor>
         <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <bean class="com.loyofo.spa.webapp.common.interceptor.MyInterceptor2"/>
+            <mvc:mapping path="/inter2/*"/>
+            <bean class="com.loyofo.spa.webapp.common.interceptor.MyInterceptor">
+                <constructor-arg name="name" value="interceptor2"/>
+            </bean>
         </mvc:interceptor>
     </mvc:interceptors>
 </beans>

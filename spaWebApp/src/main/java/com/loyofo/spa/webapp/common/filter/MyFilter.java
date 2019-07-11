@@ -12,7 +12,7 @@ public class MyFilter implements Filter {
     private String name;
 
     public MyFilter(){
-        this.name = "filter[defaultName]";
+        this.name = "默认过滤器";
     }
 
     public MyFilter(String name){
@@ -29,9 +29,9 @@ public class MyFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest)request;
-        logger.info("{} 拦截了请求 {}", getName(), req.getServletPath());
+        logger.info("过滤器 {} 拦截了请求 {}", getName(), req.getServletPath());
         chain.doFilter(request, response);
-        logger.info("{} 在请求返回前又记录了一次日志: {}", getName(), req.getServletPath());
+        logger.info("过滤器 {} 在请求返回前又记录了一次日志: {}", getName(), req.getServletPath());
     }
 
     @Override
