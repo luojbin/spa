@@ -9,16 +9,17 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:config/config-context.xml</param-value>
     </context-param>
-
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+
+    <!-- 添加自定义监听器 -->
     <listener>
         <listener-class>com.loyofo.spa.webapp.common.listener.ReqListener</listener-class>
     </listener>
 
 
-    <!-- 配置 servlet filter -->
+    <!-- 配置 servlet filter, 过滤路径与 dispatcherServlet 响应路径一样 -->
     <filter>
         <filter-name>filter1</filter-name>
         <filter-class>com.loyofo.spa.webapp.common.filter.MyFilter</filter-class>
@@ -45,6 +46,7 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <!-- 自定义 filter, 过滤指定路径的请求 -->
     <filter>
         <filter-name>filter3</filter-name>
         <filter-class>com.loyofo.spa.webapp.common.filter.MyFilter</filter-class>
@@ -71,6 +73,7 @@
         <url-pattern>/filter4/*</url-pattern>
     </filter-mapping>
 
+    <!-- DispatcherServlet, 主要的前端控制器, 控制请求分发 -->
     <servlet>
         <servlet-name>dispatcherServlet</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -80,7 +83,7 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
         <multipart-config>
-            <location>data/xml</location>
+            <location>d:/data/tmp/</location>
         </multipart-config>
     </servlet>
     <servlet-mapping>

@@ -63,9 +63,15 @@ public class WebConfig extends WebMvcConfigurerAdapter {
      *
      * 	<mvc:interceptors>
      * 		<mvc:interceptor>
-     * 			<mvc:mapping path="/**"/>
+     * 			<mvc:mapping path="/inter1/*"/>
      * 		    <bean class="com.loyofo.spa.java.common.interceptor.MyInterceptor" />
      * 		</mvc:interceptor>
+     * 	    <mvc:interceptor>
+     *          <mvc:mapping path="/inter2/*"/>
+     *          <bean class="com.loyofo.spa.webapp.common.interceptor.MyInterceptor">
+     *              <constructor-arg name="name" value="interceptor2"/>
+     *          </bean>
+     *      </mvc:interceptor>
      * 	</mvc:interceptors>
      */
     @Override
