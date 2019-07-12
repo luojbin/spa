@@ -12,6 +12,7 @@
     <artifactId>spaJavaConfig</artifactId>
     <packaging>war</packaging>
 
+    <!-- 若完全使用 javaConfig 方式, 没有 web.xml, 旧版本的 maven-war-plugin 会报错, 需要设置忽略-->
     <properties>
         <failOnMissingWebXml>false</failOnMissingWebXml>
     </properties>
