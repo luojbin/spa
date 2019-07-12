@@ -12,6 +12,10 @@
     <artifactId>spaJavaConfig</artifactId>
     <packaging>war</packaging>
 
+    <properties>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.loyofo</groupId>

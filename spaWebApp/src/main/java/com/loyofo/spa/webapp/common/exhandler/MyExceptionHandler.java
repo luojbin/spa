@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @ControllerAdvice
 public class MyExceptionHandler {
 
@@ -14,8 +17,11 @@ public class MyExceptionHandler {
 
     @ExceptionHandler(AdviceException.class)
     @ResponseBody
-    public String adviceExpHandler(Exception e){
+    public Map<String, String> adviceExpHandler(Exception e){
         logger.error("MyExceptionHandler 拦截到异常: ", e);
-        return "已拦截 AdviceException";
+        Map<String, String> map = new HashMap<>();
+        map.put("code", "500");
+        map.put("msg", "caught adviceException ok");
+        return map;
     }
 }

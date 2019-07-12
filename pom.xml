@@ -48,6 +48,7 @@
         <gson.Version>2.8.5</gson.Version>
         <logback.Version>1.2.3</logback.Version>
         <slf4j.Version>1.7.25</slf4j.Version>
+        <hikari.Version>3.2.0</hikari.Version>
     </properties>
 
     <dependencyManagement>
@@ -150,6 +151,7 @@
                 <version>${slf4j.Version}</version>
             </dependency>
 
+            <!-- dataSource -->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-jdbc</artifactId>
@@ -160,6 +162,12 @@
                 <artifactId>h2</artifactId>
                 <version>${h2.Version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.zaxxer</groupId>
+                <artifactId>HikariCP</artifactId>
+                <version>${hikari.Version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
