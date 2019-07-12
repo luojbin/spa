@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
 
@@ -31,7 +32,24 @@ public class FileController {
 
     @RequestMapping(value = "/uploadToMp", method = RequestMethod.POST)
     @ResponseBody
-    public String uploadToMp(@RequestPart("file") MultipartFile file,
+    public String uploadToMp(@RequestPart("file") Part file,
+                             @RequestParam("msg") String message,
+                             @RequestParam("uploader") String name) throws IOException {
+        log.info("获取到 {} 上传的文件数据, 备注信息:{} \n原始文件名:{}, 文件类型:{}, 文件大小为: {}", name, message,
+                file.getSubmittedFileName(), file.getContentType(), file.getSize());
+
+        String path = "d:/data/java/";
+        File dir = new File(path);
+        if (!dir.exists()){
+            dir.mkdirs();
+        }
+        file.write(path + file.getSubmittedFileName());
+        return "上传成功";
+    }
+
+    @RequestMapping(value = "/uploadToPart", method = RequestMethod.POST)
+    @ResponseBody
+    public String uploadToPart(@RequestPart("file") MultipartFile file,
                              @RequestParam("msg") String message,
                              @RequestParam("uploader") String name) throws IOException {
         log.info("获取到 {} 上传的文件数据, 备注信息:{} \n原始文件名:{}, 文件类型:{}, 文件大小为: {}", name, message,

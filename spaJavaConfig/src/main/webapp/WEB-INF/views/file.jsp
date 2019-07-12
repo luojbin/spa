@@ -23,6 +23,12 @@
     选择文件: <input type="file" name="file">
     <input type="submit" value="作为 multipartFile 提交"/>
   </form>
+  <form method="post" enctype="multipart/form-data" action="<c:url value="/file/uploadToPart"/>">
+    备注说明:<input type="text" name="msg"/><br/>
+    上传人:<input type="text" name="uploader"/><br/>
+    选择文件: <input type="file" name="file">
+    <input type="submit" value="作为 part 提交"/>
+  </form>
 
 </div>
 </body>
