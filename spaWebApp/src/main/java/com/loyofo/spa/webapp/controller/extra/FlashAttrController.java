@@ -45,6 +45,7 @@ public class FlashAttrController {
 
 
     @RequestMapping("/getMsgFromFlash")
+    @ResponseBody
     public String getMsgFromFlash(Model model){
         Map<String, Object> attrs = model.asMap();
         String msg = String.valueOf(attrs.get("msg"));
