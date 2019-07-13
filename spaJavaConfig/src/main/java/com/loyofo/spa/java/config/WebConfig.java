@@ -61,6 +61,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     /**
      * 添加拦截器, 相当于在 spring-mvc.xml 中配置
+     * 其中路径使用 ant 风格表达式, ** 表示下级所有级别的路径, 但下级不能为空
      *
      * 	<mvc:interceptors>
      * 		<mvc:interceptor>
@@ -78,9 +79,13 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new MyInterceptor("interceptor1"))
-                .addPathPatterns("/inter1/*");
+                .addPathPatterns("/inter1/**");
         registry.addInterceptor(new MyInterceptor("interceptor2"))
-                .addPathPatterns("/inter2/*");
+                .addPathPatterns("/inter2/**");
+        registry.addInterceptor(new MyInterceptor("切面拦截器"))
+                .addPathPatterns("/aspect/**");
+        registry.addInterceptor(new MyInterceptor("antPath拦截器"))
+                .addPathPatterns("/ant/**");
     }
 
     /**
