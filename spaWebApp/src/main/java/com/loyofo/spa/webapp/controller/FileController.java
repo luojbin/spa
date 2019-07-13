@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Part;
@@ -15,7 +14,7 @@ import java.io.IOException;
 @Controller
 @RequestMapping("/file")
 public class FileController {
-    private static Logger log = LoggerFactory.getLogger(FileController.class);
+    private static Logger logger = LoggerFactory.getLogger(FileController.class);
 
     @RequestMapping(value = "/upload", method = RequestMethod.GET)
     public String showUploadForm() {
@@ -26,7 +25,7 @@ public class FileController {
     public String uploadToByte(@RequestPart("file") byte[] file,
                              @RequestParam("msg") String message,
                              @RequestParam("uploader") String name) {
-        log.info("获取到 {} 上传的文件数据, 文件大小为: {}, 备注信息:{}", name, file.length, message);
+        logger.info("获取到 {} 上传的文件数据, 文件大小为: {}, 备注信息:{}", name, file.length, message);
         return "上传成功";
     }
 
@@ -35,7 +34,7 @@ public class FileController {
     public String uploadToMp(@RequestPart("file") Part file,
                              @RequestParam("msg") String message,
                              @RequestParam("uploader") String name) throws IOException {
-        log.info("获取到 {} 上传的文件数据, 备注信息:{} \n原始文件名:{}, 文件类型:{}, 文件大小为: {}", name, message,
+        logger.info("获取到 {} 上传的文件数据, 备注信息:{} \n原始文件名:{}, 文件类型:{}, 文件大小为: {}", name, message,
                 file.getSubmittedFileName(), file.getContentType(), file.getSize());
 
         String path = "d:/data/java/";
@@ -52,7 +51,7 @@ public class FileController {
     public String uploadToPart(@RequestPart("file") MultipartFile file,
                              @RequestParam("msg") String message,
                              @RequestParam("uploader") String name) throws IOException {
-        log.info("获取到 {} 上传的文件数据, 备注信息:{} \n原始文件名:{}, 文件类型:{}, 文件大小为: {}", name, message,
+        logger.info("获取到 {} 上传的文件数据, 备注信息:{} \n原始文件名:{}, 文件类型:{}, 文件大小为: {}", name, message,
                 file.getOriginalFilename(), file.getContentType(), file.getSize());
 
         String path = "d:/data/java/";

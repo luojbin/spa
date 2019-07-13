@@ -4,8 +4,7 @@ import com.loyofo.spa.webapp.common.interceptor.MyInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
@@ -16,8 +15,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * springMVC 配置类, 对应 config-web.xml
@@ -29,6 +26,10 @@ import java.util.List;
 @Configuration
 // 对应 mvc 注解扫描 <mvc:annotation-driven/>
 @EnableWebMvc
+// 相当于在 spring-mvc.xml 中配置 <aop:aspectj-autoproxy />
+// 由于切点切在 controller 上, 而 RootConfig 配置的应用上下文并不管理 controller, 切面找不到切入点, 无法织入
+// 所以必须将 @EnableAspectJAutoProxy 注解写在 WebConfig 中, 切面才能正常织入目标切点
+@EnableAspectJAutoProxy
 // 对应组件扫描 <context:component-scan base-package="com.loyofo.spa.webapp.controller"/>
 @ComponentScan(basePackages="com.loyofo.spa.webapp.controller")
 public class WebConfig extends WebMvcConfigurerAdapter {
