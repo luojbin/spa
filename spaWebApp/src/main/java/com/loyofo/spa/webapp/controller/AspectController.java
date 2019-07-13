@@ -43,7 +43,13 @@ public class AspectController {
 
     @RequestMapping("/exp")
     @ResponseBody
-    public String aspectExp(){
+    public String exp(){
+        logger.info("████████ 切面抛出异常, 进不来了吧? ████████");
+        return "你看不见我, 看到我就说明不对了";
+    }
+    @RequestMapping("/expAround")
+    @ResponseBody
+    public String expAround(){
         logger.info("████████ 切面抛出异常, 进不来了吧? ████████");
         return "你看不见我, 看到我就说明不对了";
     }
