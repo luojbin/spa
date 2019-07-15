@@ -52,6 +52,27 @@ public class TxController {
         return "SQLExp. rollback fail";
     }
 
+    @RequestMapping("/noTxrtExp")
+    @ResponseBody
+    public String noTxSaveStudentWithRtExp(){
+        try {
+            int result = service.noTxWithRTexp();
+        } catch (Exception e) {
+            logger.info("运行时异常, 回滚: {}", e.getMessage());
+        }
+        return "runtimeExp. rollback ok";
+    }
+    @RequestMapping("/noTxsqlExp")
+    @ResponseBody
+    public String noTxSaveStudentWithSQLExp(){
+        try {
+            int result = service.noTxWithSqlexp();
+        } catch (Exception e) {
+            logger.info("受查异常, 不回滚:{}", e.getMessage());
+        }
+        return "SQLExp. rollback fail";
+    }
+
 
 
 }

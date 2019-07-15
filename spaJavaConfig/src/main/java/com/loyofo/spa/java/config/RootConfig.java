@@ -17,6 +17,8 @@ import java.util.Properties;
 @ComponentScan(basePackages = "com.loyofo.spa.webapp", excludeFilters = {
         @Filter(type = FilterType.ANNOTATION, value = Controller.class)
 })
+// 只在声明该注解的上下文内查找 @Transaction 注解,
+// 若定义在 DispatcherServlet 的上下文, 则无法为 spring 应用上下文的 bean 添加事务
 @EnableTransactionManagement
 public class RootConfig {
 
