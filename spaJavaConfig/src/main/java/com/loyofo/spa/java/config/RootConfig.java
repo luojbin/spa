@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -15,6 +16,7 @@ import java.util.Properties;
 @ComponentScan(basePackages = "com.loyofo.spa.webapp", excludeFilters = {
         @Filter(type = FilterType.ANNOTATION, value = Controller.class)
 })
+@EnableTransactionManagement
 public class RootConfig {
 
     @Profile("mysql")
