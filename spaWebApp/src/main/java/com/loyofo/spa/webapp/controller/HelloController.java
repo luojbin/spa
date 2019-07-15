@@ -85,13 +85,6 @@ public class HelloController {
         return "测试通过";
     }
 
-    @RequestMapping("args")
-    @ResponseBody
-    public String args() {
-        service.oneIntArg(1);
-        service.aArg(2);
-        service.twoArg(3,"ass");
-        return "ok";
-    }
+
 
 }

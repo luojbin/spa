@@ -8,11 +8,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @Service
+@Transactional
 public class HelloService {
 
     {
@@ -56,17 +58,5 @@ public class HelloService {
 
     public Clazz getClazz(String id) {
         return clazzDao.getClazzById(id);
-    }
-
-    public void oneIntArg(int intArg) {
-        System.out.println("oneIntArg 方法, 收到一个参数" + intArg);
-    }
-
-    public void aArg(int aArg) {
-        System.out.println("aArg 方法, 收到一个参数" + aArg);
-    }
-
-    public void twoArg(int aArg, String bArg) {
-        System.out.println("twoArg 方法, 收到2个参数" + aArg + ", " + bArg);
     }
 }

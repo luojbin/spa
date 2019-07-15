@@ -11,4 +11,6 @@ public interface StudentDao {
 
     List<Clazz> getAll();
 
+    int saveStudent(Student student);
+
 }

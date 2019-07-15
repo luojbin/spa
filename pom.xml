@@ -49,6 +49,7 @@
         <logback.Version>1.2.3</logback.Version>
         <slf4j.Version>1.7.25</slf4j.Version>
         <hikari.Version>3.2.0</hikari.Version>
+        <mysql.Version>5.1.47</mysql.Version>
     </properties>
 
     <dependencyManagement>
@@ -166,6 +167,11 @@
                 <groupId>com.zaxxer</groupId>
                 <artifactId>HikariCP</artifactId>
                 <version>${hikari.Version}</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.Version}</version>
             </dependency>
 
             <dependency>

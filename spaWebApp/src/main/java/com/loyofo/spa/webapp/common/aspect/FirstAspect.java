@@ -29,14 +29,21 @@ public class FirstAspect {
 		logger.info("█ 1 号切面 after, 方法后切入");
 	}
 
-	@AfterReturning(value = "pointCut()")
-	public void AfterReturning() {
-		logger.info("█ 1 号切面 AfterReturning, 返回后切入");
+	/**
+	 * 可以通过 retuning 属性, 绑定返回值到方法参数中
+	 */
+	@AfterReturning(value = "pointCut()", returning = "result")
+	public void AfterReturning(Object result) {
+		logger.info("█ 1 号切面 AfterReturning, 返回后切入, 返回值:{}", result);
 	}
 
-	@AfterThrowing(value = "pointCut()")
-	public void AfterThrowing() {
-		logger.info("█ 1 号切面 AfterThrowing, 异常后切入");
+	/**
+	 * 可以通过 throwing 属性, 绑定异常信息到方法参数中
+	 * @param exception
+	 */
+	@AfterThrowing(value = "pointCut()", throwing = "exception")
+	public void AfterThrowing(Throwable exception) {
+		logger.info("█ 1 号切面 AfterThrowing, 异常后切入, {}:{}", exception.getClass(), exception.getMessage());
 	}
 
 }
