@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 @Service
 // 如果只在方法上添加事务注解, 则事务只会在该方法被外部调用的时候开启, 而同类中其他方法的调用, 不会开启事务
-@Transactional
+// @Transactional
 public class StudentService {
 
     private static Logger logger = LoggerFactory.getLogger(StudentService.class);

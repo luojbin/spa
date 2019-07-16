@@ -15,7 +15,8 @@ public class FirstAspect {
 	}
 	private static Logger logger = LoggerFactory.getLogger(FirstAspect.class);
 
-	@Pointcut(value = "execution(* com.loyofo.spa.webapp.controller.AspectController.order*(..))")
+	@Pointcut(value = "execution(* com.loyofo.spa.webapp.controller.AspectController.order*(..))" +
+			"|| execution(* com.loyofo.spa.webapp.controller.TxController.*(..))")
 	public void pointCut() {
 	}
 

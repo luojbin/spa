@@ -16,28 +16,28 @@ public class ThirdAspect {
 	}
 	private static Logger logger = LoggerFactory.getLogger(ThirdAspect.class);
 
-	@Pointcut(value = "execution(* com.loyofo.spa.webapp.controller.AspectController.order*(..))")
+	@Pointcut(value = "execution(* com.loyofo.spa.webapp.service.*.*(..))")
 	public void pointCut() {
 	}
 
 	@Before(value = "pointCut()")
 	public void before() {
-		logger.info("█ 3 号切面 before, 方法前切入");
+		logger.info("█ 3 号切面 before, service 方法前切入");
 	}
 
 	@After(value = "pointCut()")
 	public void after() {
-		logger.info("█ 3 号切面 after, 方法后切入");
+		logger.info("█ 3 号切面 after, service 方法后切入");
 	}
 
 	@AfterReturning(value = "pointCut()")
 	public void AfterReturning() {
-		logger.info("█ 3 号切面 AfterReturning, 返回后切入");
+		logger.info("█ 3 号切面 AfterReturning, service 返回后切入");
 	}
 
 	@AfterThrowing(value = "pointCut()")
 	public void AfterThrowing() {
-		logger.info("█ 3 号切面 AfterThrowing, 异常后切入");
+		logger.info("█ 3 号切面 AfterThrowing, service 异常后切入");
 	}
 
 }

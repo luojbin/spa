@@ -1,10 +1,11 @@
 package com.loyofo.spa.java.config;
 
 import com.loyofo.spa.webapp.common.interceptor.MyInterceptor;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.aspectj.lang.annotation.Aspect;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.*;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
@@ -31,8 +32,13 @@ import java.io.IOException;
 // 所以必须将 @EnableAspectJAutoProxy 注解写在 WebConfig 中, 切面才能正常织入目标切点
 @EnableAspectJAutoProxy
 // 对应组件扫描 <context:component-scan base-package="com.loyofo.spa.webapp.controller"/>
-@ComponentScan(basePackages="com.loyofo.spa.webapp.controller")
+@ComponentScan(basePackages="com.loyofo.spa.webapp", excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, value = Aspect.class))
 public class WebConfig extends WebMvcConfigurerAdapter {
+    private static Logger logger = LoggerFactory.getLogger(WebConfig.class);
+
+    {
+        logger.info("WebConfig 已创建");
+    }
     /**
      * 配置视图解析器, 相当于在 spring-mvc.xml 中配置
      *

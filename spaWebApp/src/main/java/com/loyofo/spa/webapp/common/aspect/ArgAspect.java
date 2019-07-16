@@ -9,10 +9,6 @@ import org.springframework.stereotype.Component;
 
 /**
  * service操作日志
- *
- * @author zhangyi
- * @version 2.0
- * @time 2018年1月19日 上午9:57:07
  */
 @Aspect
 @Component

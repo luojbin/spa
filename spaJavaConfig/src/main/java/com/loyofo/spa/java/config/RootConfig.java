@@ -1,66 +1,31 @@
 package com.loyofo.spa.java.config;
 
-import com.zaxxer.hikari.HikariDataSource;
-import org.springframework.context.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
-
-import javax.sql.DataSource;
-import java.util.Properties;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
-@ComponentScan(basePackages = "com.loyofo.spa.webapp", excludeFilters = {
-        @Filter(type = FilterType.ANNOTATION, value = Controller.class)
-})
-// 只在声明该注解的上下文内查找 @Transaction 注解,
+@ComponentScan(
+        // basePackages = "com.loyofo.spa",
+        basePackages = {"com.loyofo.spa.webapp.common.aspect", "com.loyofo.spa.java.config"},
+        excludeFilters = {@Filter(type = FilterType.ANNOTATION, value = Controller.class)
+        , @Filter(type = FilterType.ANNOTATION, value = EnableWebMvc.class) })
+// 只在声明该注解的上下文内查找 @Transactional 注解,
 // 若定义在 DispatcherServlet 的上下文, 则无法为 spring 应用上下文的 bean 添加事务
-@EnableTransactionManagement
+// @EnableTransactionManagement
+// 只在声明该注解的上下文内查找被切组件, 如果有多个上下文都有各自的切面bean, 则需要在不同的上下文中重复添加注解
+// 此处的注解是为了添加 DataSourceConfig 与 service 层上的切面组件,
+// @EnableAspectJAutoProxy
 public class RootConfig {
+    private static Logger logger = LoggerFactory.getLogger(RootConfig.class);
 
-    @Profile("mysql")
-    @Bean
-    public DataSource mysqlDs() {
-        HikariDataSource ds = new HikariDataSource();
-        ds.setDriverClassName("com.mysql.jdbc.Driver");
-        ds.setJdbcUrl("jdbc:mysql://47.104.220.222:8063/test?useSSL=false");
-        ds.setUsername("luojbin");
-        ds.setPassword("luojbin2@Dev");
-        ds.setMaximumPoolSize(10);
-        ds.setMinimumIdle(100);
-        Properties properties = new Properties();
-        properties.setProperty("cachePrepStmts","true");
-        properties.setProperty("prepStmtCacheSize","250");
-        properties.setProperty("prepStmtCacheSqlLimit","2048");
-        properties.setProperty("useServerPrepStmts","true");
-        ds.setDataSourceProperties(properties);
-        return  ds;
-    }
-
-    @Profile("h2")
-    @Bean
-    public DataSource h2Ds() {
-        return new EmbeddedDatabaseBuilder()
-                .setType(EmbeddedDatabaseType.H2)
-                .addScript("classpath:testData.sql")
-                .build();
-    }
-
-    @Bean
-    public JdbcTemplate jdbcTemplate(DataSource dataSource){
-        return new JdbcTemplate(dataSource);
-    }
-
-    /**
-     * 事务管理器
-     */
-    @Bean
-    public DataSourceTransactionManager dataSourceTransactionManager(DataSource dataSource){
-        DataSourceTransactionManager txm =  new DataSourceTransactionManager(dataSource);
-        return txm;
+    {
+        logger.info("RootConfig 已创建");
     }
 }
