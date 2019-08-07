@@ -7,7 +7,9 @@
         </encoder>
     </appender>
 
-    <root level="info">
+    <logger level="trace" name="com.zaxxer.hikari"/>
+
+    <root level="error">
         <appender-ref ref="ca" />
     </root>
 </configuration>

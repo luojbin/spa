@@ -28,6 +28,26 @@ public class ParameterTest3 {
         }
     }
 
+    @Test
+    public void testMultiAssert() {
+        Object[][] param = new Object[][]{
+                {"abcdefgh", true},
+                {"abcd", new RegexException("不符合正则规则: abcd")},
+                {"1233", new RegexException("不符合正则规则: 1233")},
+                {"测试失败", new RegexException("不符合正则规则: 测试失败")},
+        };
+        for(Object[] p : param){
+            String str = p[0].toString();
+            try {
+                assertTrue(testStr(str));
+            } catch (Exception e) {
+                Exception expectedException = (Exception) p[1];
+                assertEquals(expectedException.getClass(), e.getClass());
+                assertEquals(expectedException.getMessage(), e.getMessage());
+            }
+        }
+    }
+
 
     @Test
     public void testAdd() {
@@ -35,7 +55,7 @@ public class ParameterTest3 {
                 {1, 2, 3},
                 {2, 3, 5},
                 {3, 4, 7},
-                {4, 5, 5}
+                {4, 5, 9}
         };
 
         for (int[] p : params) {
