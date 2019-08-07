@@ -34,7 +34,7 @@
         <jstl.Version>1.2</jstl.Version>
         <junit.Version>4.12</junit.Version>
         <log4j.Version>1.2.14</log4j.Version>
-        <mockito.Version>1.9.5</mockito.Version>
+        <mockito.Version>2.23.4</mockito.Version>
         <servletApi.Version>3.1.0</servletApi.Version>
         <slf4j.Version>1.7.5</slf4j.Version>
         <springAMQP.Version>1.0.0.RELEASE</springAMQP.Version>
