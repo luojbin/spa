@@ -36,11 +36,6 @@ public class ParameterTest {
         assertEquals("求和方法计算错误", expected, sum(first, second));
     }
 
-    @Test
-    public void testOther() {
-        System.out.println("其他测试");
-    }
-
     public int sum(int a, int b){
         return a + b;
     }
