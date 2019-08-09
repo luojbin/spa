@@ -25,4 +25,9 @@ public class MockObject implements MockInterface{
     public <T> void voidMethod(List<T> list) {
         System.out.println("真实对象调用 voidMethod: " + list);
     }
+
+    public int add(int a, int b){
+        System.out.println("真实对象调用 add" );
+        return a + b;
+    }
 }

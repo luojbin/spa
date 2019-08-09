@@ -2,7 +2,9 @@ package com.loyofo.spa.test.mockito;
 
 import com.loyofo.spa.test.mockito.entity.MockInterface;
 import com.loyofo.spa.test.mockito.entity.MockObject;
+import org.hamcrest.Matcher;
 import org.junit.Test;
+import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -140,5 +142,95 @@ public class MockMethodTest {
         // when(mockObject.intMethod(1)).thenReturn(100);
         doReturn(100).when(mockObject).intMethod(1);
         assertEquals(mockObject.intMethod(1), 100);
+    }
+
+    @Test
+    public void testOverrideStub() {
+        MockObject mockObject = mock(MockObject.class);
+        when(mockObject.intMethod(1)).thenReturn(1);
+        assertEquals(mockObject.intMethod(1), 1);
+        assertEquals(mockObject.intMethod(1), 1);
+        assertEquals(mockObject.intMethod(1), 1);
+
+        // 覆盖存根
+        when(mockObject.intMethod(1)).thenReturn(100);
+        assertEquals(mockObject.intMethod(1), 100);
+        assertEquals(mockObject.intMethod(1), 100);
+        assertEquals(mockObject.intMethod(1), 100);
+    }
+
+    @Test
+    public void testParamMatch() {
+        MockObject mockObject = mock(MockObject.class);
+        // 参数匹配所有 int 类型的值
+        when(mockObject.intMethod(anyInt())).thenReturn(1);
+        assertEquals(mockObject.intMethod(1), 1);
+        assertEquals(mockObject.intMethod(2), 1);
+        assertEquals(mockObject.intMethod(3), 1);
+
+        // 可以在验证方法时使用参数匹配
+        verify(mockObject, times(3)).intMethod(anyInt());
+    }
+
+    @Test
+    public void testMyMatcher() {
+        MockObject mockObject = mock(MockObject.class);
+        MyMatcher myMatcher = new MyMatcher();
+        // 参数匹配自定义规则
+        when(mockObject.strMethod(argThat(myMatcher))).thenReturn("true");
+        assertEquals(mockObject.strMethod("true1"), "true");
+        assertEquals(mockObject.strMethod("true2"), "true");
+        assertNull(mockObject.strMethod("a"));
+
+        verify(mockObject, times(2)).strMethod(argThat(myMatcher));
+    }
+    @Test
+    public void testLambdaMatcher() {
+        MockObject mockObject = mock(MockObject.class);
+        // 参数匹配自定义规则
+        when(mockObject.strMethod(argThat(s->s.startsWith("true")))).thenReturn("true");
+        assertEquals(mockObject.strMethod("true1"), "true");
+        assertEquals(mockObject.strMethod("true2"), "true");
+        assertNull(mockObject.strMethod("a"));
+
+        verify(mockObject, times(2)).strMethod(argThat(s -> s.startsWith("true")));
+    }
+
+    @Test
+    public void testAllMatcher() {
+        MockObject mockObject = mock(MockObject.class);
+        // 多参方法中, 若使用了匹配器, 则所有参数都要用匹配器, 固定参数可以使用 eq() 匹配器
+        // when(mockObject.add(anyInt(), 1)).thenReturn(100);
+        when(mockObject.add(anyInt(), eq(1))).thenReturn(100);
+        assertEquals(mockObject.add(10, 1), 100);
+    }
+
+    @Test
+    public void testTimes() {
+        MockObject mockObject = mock(MockObject.class);
+        when(mockObject.intMethod(1)).thenReturn(1);
+        when(mockObject.intMethod(2)).thenReturn(2);
+        when(mockObject.intMethod(3)).thenReturn(3);
+        mockObject.intMethod(1);
+
+        mockObject.intMethod(2);
+        mockObject.intMethod(2);
+
+        mockObject.intMethod(3);
+        mockObject.intMethod(3);
+        mockObject.intMethod(3);
+
+        verify(mockObject).intMethod(1);
+        verify(mockObject, times(2)).intMethod(2);
+        verify(mockObject, atLeast(3)).intMethod(3);
+        verify(mockObject, atMost(4)).intMethod(3);
+        verify(mockObject, never()).intMethod(4);
+    }
+}
+
+class MyMatcher implements ArgumentMatcher<String> {
+    @Override
+    public boolean matches(String argument) {
+        return argument.startsWith("true");
     }
 }
