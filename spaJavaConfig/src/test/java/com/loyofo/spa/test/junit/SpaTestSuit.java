@@ -1,4 +1,4 @@
-package com.loyofo.spa.test;
+package com.loyofo.spa.test.junit;
 
 import com.loyofo.spa.test.controller.MavControllerTest;
 import com.loyofo.spa.test.controller.ParamControllerTest;
