@@ -1,5 +1,7 @@
 package com.loyofo.spa.test.mockito.entity;
 
+import java.util.List;
+
 public class MockObject implements MockInterface{
     @Override
     public String strMethod(String s) {
@@ -17,5 +19,10 @@ public class MockObject implements MockInterface{
     public boolean booleanMethod(boolean b) {
         System.out.println("真实对象调用 booleanMethod: " + b);
         return !b;
+    }
+
+    @Override
+    public <T> void voidMethod(List<T> list) {
+        System.out.println("真实对象调用 voidMethod: " + list);
     }
 }
