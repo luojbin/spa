@@ -2,6 +2,7 @@ package com.loyofo.spa.test.mockito;
 
 import com.loyofo.spa.test.mockito.entity.MockInterface;
 import com.loyofo.spa.test.mockito.entity.MockObject;
+import com.loyofo.spa.test.mockito.entity.MyMatcher;
 import org.hamcrest.Matcher;
 import org.junit.Test;
 import org.mockito.ArgumentMatcher;
@@ -273,12 +274,5 @@ public class MockMethodTest {
 
         // 检验从未使用 mock2 和 mock3
         verifyZeroInteractions(mock2, mock3);
-    }
-}
-
-class MyMatcher implements ArgumentMatcher<String> {
-    @Override
-    public boolean matches(String argument) {
-        return argument.startsWith("true");
     }
 }
