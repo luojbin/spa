@@ -1,5 +1,6 @@
-package com.loyofo.spa.test.mockito.entity;
+package com.loyofo.spa.test.mockito;
 
+import com.loyofo.spa.test.mockito.entity.MockObject;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
