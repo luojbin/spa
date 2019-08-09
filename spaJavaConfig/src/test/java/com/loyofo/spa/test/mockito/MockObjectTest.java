@@ -4,6 +4,9 @@ import com.loyofo.spa.test.mockito.entity.MockInterface;
 import com.loyofo.spa.test.mockito.entity.MockObject;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
@@ -42,5 +45,25 @@ public class MockObjectTest {
         spyByInterface.strMethod("spyByInterface 调用 String 方法");
         spyByClass.strMethod("spyByClass 调用 String 方法");
         spyByRealObj.strMethod("spyByRealObj 调用 String 方法");
+
+        when(spyByRealObj.intMethod(1)).thenReturn(100);
+        assertEquals(spyByRealObj.intMethod(1), 100);
+        assertEquals(spyByRealObj.intMethod(2), 4);
+    }
+
+    @Test
+    public void testSpy() {
+        List<Integer> list = new ArrayList<>();
+        List<Integer> spyList = spy(list);
+
+        list.add(1);
+        list.add(2);
+
+        spyList.add(3);
+        spyList.add(4);
+        spyList.add(5);
+
+        assertEquals(list.size(), 2);
+        assertEquals(spyList.size(), 3);
     }
 }

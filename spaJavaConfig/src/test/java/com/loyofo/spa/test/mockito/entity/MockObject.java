@@ -26,6 +26,11 @@ public class MockObject implements MockInterface{
         System.out.println("真实对象调用 voidMethod: " + list);
     }
 
+    public final int finalInt(int i){
+        System.out.println("final 方法, 无法存根. 传入参数:" + i);
+        return 10 * i;
+    }
+
     public int add(int a, int b){
         System.out.println("真实对象调用 add" );
         return a + b;

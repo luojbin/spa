@@ -275,4 +275,22 @@ public class MockMethodTest {
         // 检验从未使用 mock2 和 mock3
         verifyZeroInteractions(mock2, mock3);
     }
+
+    @Test
+    public void testFinal() {
+        MockObject mock = mock(MockObject.class);
+        MockObject spy = spy(MockObject.class);
+
+        // 无法覆盖 final 方法, 始终会返回 10
+        assertEquals(mock.finalInt(1), 10);
+        assertEquals(spy.finalInt(1), 10);
+
+        // 无法完成方法存根
+        // when(mock.finalInt(1)).thenReturn(2);
+        // when(spy.finalInt(1)).thenReturn(3);
+
+        // 无法验证方法调用
+        // verify(mock).finalInt(1);
+        // verify(spy).finalInt(1);
+    }
 }
