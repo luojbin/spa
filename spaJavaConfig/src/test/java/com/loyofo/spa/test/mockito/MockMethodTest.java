@@ -5,6 +5,7 @@ import com.loyofo.spa.test.mockito.entity.MockObject;
 import org.hamcrest.Matcher;
 import org.junit.Test;
 import org.mockito.ArgumentMatcher;
+import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -225,6 +226,53 @@ public class MockMethodTest {
         verify(mockObject, atLeast(3)).intMethod(3);
         verify(mockObject, atMost(4)).intMethod(3);
         verify(mockObject, never()).intMethod(4);
+    }
+
+    @Test
+    public void testOrder() {
+        MockObject mock1 = mock(MockObject.class);
+        MockObject mock2 = mock(MockObject.class);
+        MockObject mock3 = mock(MockObject.class);
+
+        mock1.strMethod("mock1-1");
+        mock2.strMethod("mock2-1");// A
+        mock3.strMethod("mock3-2");
+
+        mock1.strMethod("mock1-2");
+        mock1.strMethod("mock1-3");// B
+        mock2.strMethod("mock2-1");// C
+        mock1.strMethod("mock1-3");// D
+        mock1.strMethod("mock1-3");// E
+
+        // 将需要按顺序检验的模拟对象, 创建顺序校验器
+        InOrder inOrder = inOrder(mock1, mock2, mock3);
+
+        inOrder.verify(mock1).strMethod("mock1-1");
+        inOrder.verify(mock1).strMethod("mock1-2");
+        inOrder.verify(mock1).strMethod("mock1-3");
+        // 校验在 mock1-3 后的 mock2-1, 找到 C
+        inOrder.verify(mock2).strMethod("mock2-1");
+        // 校验在 mock2-1 后的 mock1-3, 找到 D 和 E
+        inOrder.verify(mock1, times(2)).strMethod("mock1-3");
+    }
+
+    @Test
+    public void testNeverUsed() {
+        MockObject mock1 = mock(MockObject.class);
+        MockObject mock2 = mock(MockObject.class);
+        MockObject mock3 = mock(MockObject.class);
+
+        mock1.strMethod("mock1");
+        mock1.strMethod("mock1");
+        mock1.strMethod("mock1");
+        verify(mock1, times(3)).strMethod("mock1");
+
+        // 检验没有更多的调用
+        // mock1.strMethod("mock2");
+        verifyNoMoreInteractions(mock1);
+
+        // 检验从未使用 mock2 和 mock3
+        verifyZeroInteractions(mock2, mock3);
     }
 }
 
