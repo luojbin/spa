@@ -73,6 +73,17 @@ public class TxController {
         return "SQLExp. rollback fail";
     }
 
+    @RequestMapping("/updateLog")
+    @ResponseBody
+    public String updateLogTest(){
+        try {
+            int result = service.updateStudent();
+        } catch (Exception e) {
+            logger.info("受查异常, 不回滚:{}", e.getMessage());
+        }
+        return "更新成功";
+    }
+
 
 
 }

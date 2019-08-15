@@ -13,4 +13,6 @@ public interface StudentDao {
 
     int saveStudent(Student student);
 
+    int update(Student student);
+
 }

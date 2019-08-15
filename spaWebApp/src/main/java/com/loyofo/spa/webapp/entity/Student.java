@@ -1,14 +1,23 @@
 package com.loyofo.spa.webapp.entity;
 
+import com.loyofo.spa.webapp.common.annotation.EntityField;
+import com.loyofo.spa.webapp.common.annotation.EntityId;
+
 import java.util.List;
 import java.util.Objects;
 
 public class Student {
 
+    @EntityId
     Integer id;
+
+    @EntityField("班级编号")
     Integer classId;
+    @EntityField("学生姓名")
     String studentName;
+    @EntityField("年龄")
     Integer age;
+    @EntityField("地址")
     String address;
     List<Score> scoreList;
 

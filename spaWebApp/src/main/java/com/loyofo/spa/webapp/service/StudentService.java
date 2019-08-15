@@ -40,7 +40,10 @@ public class StudentService {
         student.setStudentName("正常插入");
         student.setAddress("正常插入没问题系列");
         student.setAge(12);
-        return studentDao.saveStudent(student);
+        int result = studentDao.saveStudent(student);
+
+        System.out.println(result);
+        return result;
     }
 
     public int saveStudertThrowRTExp() {
@@ -78,4 +81,16 @@ public class StudentService {
     }
 
 
+    public int updateStudent() {
+        Student student = new Student();
+        student.setId(100);
+        student.setClassId(10);
+        student.setStudentName("正常插入");
+        student.setAddress("更新成功");
+        student.setAge(10);
+        int result = studentDao.update(student);
+        System.out.println("更新成功 "+ result);
+        return result;
+
+    }
 }

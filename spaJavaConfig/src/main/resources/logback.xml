@@ -9,7 +9,7 @@
 
     <logger level="trace" name="com.zaxxer.hikari"/>
 
-    <root level="error">
+    <root level="info">
         <appender-ref ref="ca" />
     </root>
 </configuration>
