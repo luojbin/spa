@@ -3,11 +3,9 @@ package com.loyofo.spa.test.mockito;
 import com.loyofo.spa.test.mockito.entity.MockInterface;
 import com.loyofo.spa.test.mockito.entity.MockObject;
 import com.loyofo.spa.test.mockito.entity.MyMatcher;
-import org.hamcrest.Matcher;
 import org.junit.Test;
-import org.mockito.ArgumentMatcher;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InOrder;
-import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
@@ -292,5 +290,35 @@ public class MockMethodTest {
         // 无法验证方法调用
         // verify(mock).finalInt(1);
         // verify(spy).finalInt(1);
+    }
+
+    @Test
+    public void testReturnValue() {
+        MockObject mock = mock(MockObject.class);
+        MockObject smartMock = mock(MockObject.class, RETURNS_SMART_NULLS);
+        // 普通 mock 返回null, smartMock 返回空字符串
+        assertNull(mock.strMethod(""));
+        assertEquals(smartMock.strMethod(""), "");
+    }
+
+    @Test
+    public void testCaptureArg() {
+        MockObject mock = mock(MockObject.class);
+        mock.intMethod(123);
+        mock.strMethod("参数捕获");
+        mock.add(100,50);
+
+        // 获取方法被调用时的参数
+        ArgumentCaptor<Integer> intArg1 = ArgumentCaptor.forClass(Integer.class);
+        ArgumentCaptor<Integer> intArg2 = ArgumentCaptor.forClass(Integer.class);
+        verify(mock).add(intArg1.capture(), intArg2.capture());
+
+        ArgumentCaptor<String> strArg = ArgumentCaptor.forClass(String.class);
+        verify(mock).strMethod(strArg.capture());
+
+        // 对捕获的参数进行校验
+        assertEquals((int)intArg1.getValue(), 100);
+        assertEquals((int)intArg2.getValue(), 50);
+        assertEquals(strArg.getValue(), "参数捕获");
     }
 }
