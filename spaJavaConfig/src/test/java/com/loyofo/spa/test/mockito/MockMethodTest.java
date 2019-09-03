@@ -321,4 +321,32 @@ public class MockMethodTest {
         assertEquals((int)intArg2.getValue(), 50);
         assertEquals(strArg.getValue(), "参数捕获");
     }
+
+    @Test
+    public void testPartial() {
+        // 普通 mock 对象, 不会调用真实方法
+        MockObject mock1 = mock(MockObject.class);
+        mock1.intMethod(200);
+
+        // partial Mock, 方法存根时选择 thenCallRealMethod(), 会调用真实方法
+        MockObject partialMock = mock(MockObject.class);
+        when(partialMock.intMethod(400)).thenCallRealMethod();
+        partialMock.intMethod(400);
+    }
+
+    @Test
+    public void testReset() {
+        MockObject mock = mock(MockObject.class);
+        when(mock.intMethod(1)).thenReturn(100);
+        when(mock.intMethod(2)).thenReturn(222);
+
+        System.out.println(mock.intMethod(1));
+        System.out.println(mock.intMethod(2));
+
+        System.out.println("重置mock");
+        reset(mock);
+        System.out.println(mock.intMethod(1));
+        System.out.println(mock.intMethod(2));
+    }
+
 }
