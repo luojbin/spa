@@ -16,4 +16,9 @@ public class StringTest {
         String b = "b";
         String ab = new StringBuilder().append(a).append(b).toString();
     }
+
+    @Test
+    public void testSpa() {
+        System.out.println("zzghe");
+    }
 }
