@@ -20,5 +20,6 @@ public class StringTest {
     @Test
     public void testSpa() {
         System.out.println("zzghe");
+        System.out.println("这个到底要怎么玩, 为什么提交失败");
     }
 }
