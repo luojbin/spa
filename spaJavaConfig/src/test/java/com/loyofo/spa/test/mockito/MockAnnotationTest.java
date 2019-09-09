@@ -20,6 +20,9 @@ public class MockAnnotationTest {
 
     @Test
     public void testMockAnnotation() {
+
+
+
         when(mock.strMethod("@Mock")).thenReturn("注入成功, 可以调用");
         assertEquals(mock.strMethod("@Mock"), "注入成功, 可以调用");
 
