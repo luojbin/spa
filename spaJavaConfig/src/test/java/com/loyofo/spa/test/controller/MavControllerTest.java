@@ -114,7 +114,50 @@ public class MavControllerTest {
         List<Spittle> list = new ArrayList<>(20);
         for (int i = 0; i < count; i++) {
             list.add(new Spittle("测试消息 Spittle" + i, new Date()));
+
         }
+        System.out.println();
         return list;
     }
+
+    int autoFieldInt;
+    int autoFieldInt2;
+    String autoFieldStr;
+    String autoFieldStr2;
+
+    boolean ddd = true;
+
+    public void autoMethod(String s) {
+    }
+
+    public void autoMethod2(String s) {
+    }
+
+    public void testAutoComplete(){
+        // 默认自动补全, CTRL+空格 或 ALT+/
+        // 显示所有与输入相关的内容, 忽略语法要求. 输入auto 时会同时显示 autoFieldInt autoFieldStr autoMethod
+        // int a = auto
+
+        // 类型自动补全, CTRL+SHIFT+空格
+        // 显示符合语法规则, 并与当前输入相关的内容, 输入 auto 时只显示 autoFieldInt/autoFieldInt2
+        // 多次点击时, 会显示间接符合语法规则的内容, 如 autoFieldStr.length() 等以auto开头且满足int 类型的选项
+        // int b = auto
+
+        // List<String> strList = new ArrayList<>();
+        // strList.add(autoFieldStr);
+
+        autoMethod(autoFieldStr2);
+        autoMethod2(autoFieldStr2);
+
+        if (!ddd) {
+            System.out.println("ok");
+        }
+
+        if (ddd) {
+            System.out.println("fail");
+        }
+    }
+
+
+
 }

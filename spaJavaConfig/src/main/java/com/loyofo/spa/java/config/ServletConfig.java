@@ -28,7 +28,7 @@ public class ServletConfig implements WebApplicationInitializer {
         servletContext.addFilter(ant, new MyFilter(ant))
                 .addMappingForUrlPatterns(null, false, "/" + ant + "/*");
 
-        // 添加监听器
+        // 添加监听器自定义浮窗菜单
         servletContext.addListener(ReqListener.class);
     }
 }

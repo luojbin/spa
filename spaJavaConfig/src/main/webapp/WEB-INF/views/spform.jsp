@@ -27,5 +27,13 @@
   <sf:password path="password" cssErrorClass="error"/><br/>
   <input type="submit" value="Register"/>
 </sf:form>
+
+<div id="hello">
+  <div class="good"></div>
+  <div id="world">
+    <world></world>
+  </div>
+</div>
+
 </body>
 </html>

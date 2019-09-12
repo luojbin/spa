@@ -4,6 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AssertTest {
 
     @Test
@@ -31,6 +34,7 @@ public class AssertTest {
 
 
     }
+
     @Test
     public void testSame() {
         String a = "123";
@@ -40,3 +44,5 @@ public class AssertTest {
         assertSame(a, b);
     }
 }
+
+class Listsss{}
