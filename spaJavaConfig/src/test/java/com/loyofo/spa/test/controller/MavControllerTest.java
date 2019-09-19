@@ -6,6 +6,8 @@ import com.loyofo.spa.webapp.entity.Spittle;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.omg.CORBA.PRIVATE_MEMBER;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -130,11 +132,36 @@ public class MavControllerTest {
 
     public void autoMethod(String s) {
     }
-
     public void autoMethod2(String s) {
     }
 
+    public void autoMethod3(String strVal, int intVal ) {}
+    public void autoMethod3(String s, String s2, String s3, int s4) {}
+    public void autoMethod3(String s, String s2, String s3, String s4, String s5, String s6, String s7 , String s8 ) {}
+
+
+    boolean isOk(){
+        return true;
+    }
+    boolean isFail() {
+        return false;
+    }
+
     public void testAutoComplete(){
+
+        boolean bb = !isOk();
+
+        boolean fail = !isFail();
+
+
+        boolean a = !isOk();
+
+        boolean aa = !isOk();
+
+
+        autoMethod3("", 1);
+
+        autoMethod("sdfsf");
         // 默认自动补全, CTRL+空格 或 ALT+/
         // 显示所有与输入相关的内容, 忽略语法要求. 输入auto 时会同时显示 autoFieldInt autoFieldStr autoMethod
         // int a = auto
