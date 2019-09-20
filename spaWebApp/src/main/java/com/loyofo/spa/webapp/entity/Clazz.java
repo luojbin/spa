@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Objects;
 
 public class Clazz {
+
+
+
     @Override
     public String toString() {
         return "Clazz{" +
@@ -29,6 +32,8 @@ public class Clazz {
     public int hashCode() {
         return Objects.hash(id, className, studentAmount, studentList);
     }
+
+
 
     public Integer getId() {
         return id;
@@ -66,4 +71,7 @@ public class Clazz {
     String className;
     Integer studentAmount;
     List<Student> studentList;
+    static List<Student> staticList;
+
+    public String toUpperCase() {return getClassName().toUpperCase();}
 }

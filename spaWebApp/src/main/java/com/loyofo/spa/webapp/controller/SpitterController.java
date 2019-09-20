@@ -42,4 +42,20 @@ public class SpitterController {
         return "redirect:/spitter/" + spitter.getUsername();
     }
 
+    public String newString(){ return null; }
+    public String saveString(){ return null; }
+
+    public String getString(){ return null; }
+
+    public String myString(){ return null; }
+    public String checkString(){ return null; }
+
+
+    public Spitter save(Spitter spitter) {
+        return spitterRepository.save(spitter);
+    }
+
+    public static void staticMethod() {
+
+    }
 }

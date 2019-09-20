@@ -15,6 +15,15 @@ public class Car extends Vehicle {
         super.run();
     }
 
+    public void invokeMethod() {
+        method();
+    }
+
+    /** 原方法签名  method() */
+    public void method() {
+        // 原方法体 输出语句
+        System.out.println("原始方法体");
+    }
 
     public void method(List<String> list) {
 
