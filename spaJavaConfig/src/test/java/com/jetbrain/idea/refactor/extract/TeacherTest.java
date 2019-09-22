@@ -17,4 +17,9 @@ public class TeacherTest {
         Teacher t = new JavaTeacher();
         t.prepare();
     }
+
+    @Test
+    public void testPrintResutl() {
+        new Teacher().printResult();
+    }
 }
