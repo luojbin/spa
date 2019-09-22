@@ -1,5 +1,8 @@
 package com.loyofo.spa.test.idea;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * dfdf
  *
@@ -13,6 +16,25 @@ public class Car extends Vehicle {
     }
 
 
+    public void method(List<String> list) {
+
+        List l = new ArrayList();
+        System.out.println(l);
 
 
+        if (list == null) {
+            System.out.println(list.getClass());
+        } else if (list.size() == 0) {
+            System.out.println(list.getClass());
+        } else {
+            System.out.println(list.getClass());
+        }
+
+        String a = "abdcc";
+        System.out.println(a);
+    }
+
+    public static void main(String[] args) {
+
+    }
 }

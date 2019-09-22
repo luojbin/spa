@@ -1,10 +1,5 @@
 package com.loyofo.spa.test.idea;
 
-import org.junit.Test;
-
-import java.util.Arrays;
-import java.util.regex.Pattern;
-
 public class Gtr extends Vehicle{
     public void run() {
         super.run();
@@ -15,11 +10,6 @@ public class Gtr extends Vehicle{
     private int price;
     private int age;
 
-
-    @Test
-    public void testRegex() {
-        System.out.println(getType());
-    }
 
     public String getType() {
         System.out.println("这里进来了");
