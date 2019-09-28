@@ -1,5 +1,8 @@
 package com.jetbrain.idea.refactor.extract;
 
+/**
+ *
+ */
 public class JavaTeacher extends Teacher implements Person {
 
 
@@ -9,6 +12,8 @@ public class JavaTeacher extends Teacher implements Person {
         System.out.println(a);
     }
 
+    private int aaa;
+    private int aaa3;
 
     public void earnMoney() {
         double salary = 10000 + 10000 * Math.random();
@@ -20,6 +25,7 @@ public class JavaTeacher extends Teacher implements Person {
         return "luojbin";
     }
 
+
     public void introduce() {
         Object name = getName();
         System.out.println("张三的老师:" + name);
@@ -27,5 +33,16 @@ public class JavaTeacher extends Teacher implements Person {
         System.out.println("王五的老师:" + name);
         System.out.println("钱六的老师:" + name);
         System.out.println("田七的老师:" + name);
+    }
+
+
+    public static void main(String[] args) {
+        System.out.println(111);
+        System.out.println(111);
+        System.out.println(111);
+        System.out.println(111);
+        System.out.println(111);
+        System.out.println(111);
+
     }
 }
