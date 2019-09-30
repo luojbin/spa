@@ -1,5 +1,10 @@
 package com.jetbrain.idea.debug;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class EmulatedPoint {
     public static void main(String[] args) {
         new Ep2().em1();
@@ -42,6 +47,11 @@ class Ep3 implements Ep1{
         }
         System.out.println("方法体执行完了" + b);
     }
+
+    public static void em3(Map o) {
+        System.out.println(o);
+        Object obj = o.get("e1");
+    }
 }
 
 class Ep4 extends Ep3 {
@@ -52,6 +62,23 @@ class Ep4 extends Ep3 {
             a++;
         }
         System.out.println("方法体执行完了" + a);
+        List<Object> l = new ArrayList<>();
+        l.add("asa0");
+        l.add("asa1");
+        l.add("asa2");
+        l.add("asa3");
+        l.add("asa4");
+        l.add("asa5");
+
+        Ep4 e1 = this;
+        l.add(e1);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("e1", this);
+
+        System.out.println(l);
+
+        Ep3.em3(map);
     }
 
     @Override
