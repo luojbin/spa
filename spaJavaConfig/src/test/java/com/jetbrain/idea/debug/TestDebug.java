@@ -173,6 +173,7 @@ class Debug5 {
 
 class Debug6 {
     public void method() {
+        String println = "println";
         System.out.println(1);
         System.out.println(1);
         System.out.println(1);
