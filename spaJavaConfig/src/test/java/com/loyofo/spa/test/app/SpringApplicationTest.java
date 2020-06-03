@@ -1,8 +1,6 @@
 package com.loyofo.spa.test.app;
 
-import com.loyofo.spa.java.config.AppConfig;
 import com.loyofo.spa.java.config.RootConfig;
-import com.loyofo.spa.java.config.ServletConfig;
 import com.loyofo.spa.java.config.WebConfig;
 import com.loyofo.spa.webapp.entity.Clazz;
 import com.loyofo.spa.webapp.service.HelloService;
