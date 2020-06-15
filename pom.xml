@@ -26,7 +26,7 @@
         <hamcrest.Version>1.3</hamcrest.Version>
         <hibernate.Version>4.1.6.Final</hibernate.Version>
         <hibernateEntityManager.Version>4.0.1.Final</hibernateEntityManager.Version>
-        <hibernateValidator.Version>5.0.1.Final</hibernateValidator.Version>
+        <hibernateValidator.Version>5.3.5.Final</hibernateValidator.Version>
         <jackson.Version>2.4.3</jackson.Version>
         <javaxMail.Version>1.4.7</javaxMail.Version>
         <jspApi.Version>2.2</jspApi.Version>
