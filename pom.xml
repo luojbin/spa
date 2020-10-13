@@ -32,7 +32,7 @@
         <jspApi.Version>2.2</jspApi.Version>
         <jspEl.Version>2.2.4</jspEl.Version>
         <jstl.Version>1.2</jstl.Version>
-        <junit.Version>4.12</junit.Version>
+        <junit.Version>4.13.1</junit.Version>
         <log4j.Version>1.2.14</log4j.Version>
         <mockito.Version>2.23.4</mockito.Version>
         <servletApi.Version>3.1.0</servletApi.Version>
