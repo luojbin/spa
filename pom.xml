@@ -97,6 +97,18 @@
                 </exclusions>
             </dependency>
 
+            <!-- spring security min-->
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-web</artifactId>
+                <version>${springSecurity.Version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-config</artifactId>
+                <version>${springSecurity.Version}</version>
+            </dependency>
+
             <!-- JSR-303 -->
             <dependency>
                 <groupId>org.hibernate</groupId>
