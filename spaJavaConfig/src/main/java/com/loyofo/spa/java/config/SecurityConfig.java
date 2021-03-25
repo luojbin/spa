@@ -6,13 +6,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
-import org.springframework.security.config.annotation.web.servlet.configuration.WebMvcSecurityConfiguration;
-import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 
 @Configuration
 @EnableWebMvcSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    {
+        System.out.println("spring security 配置");
+    }
     /**
      * 配置 用户信息存储
      * @param auth
@@ -20,7 +21,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        super.configure(auth);
+        auth.inMemoryAuthentication()
+                // 指定用户名和密码, 并用 authorities 授权
+                .withUser("test").password("test").authorities("TEST", "ROLE_USER").and()
+                // roles() 方法是 authorities() 的语法糖, 自动添加 `ROLE_` 的前缀, 效果一样
+                .withUser("admin").password("admin").roles("USER", "ADMIN");
     }
 
     /**
@@ -30,7 +35,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
+        http.formLogin()
+                .loginPage("/login")
+                .and()
+                .logout()
+                .logoutSuccessUrl("/")
+                .and()
+                .authorizeRequests()
+                .antMatchers("/login").permitAll()
+                .anyRequest().authenticated();
+
     }
 
     /**

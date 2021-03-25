@@ -26,7 +26,7 @@ import java.util.Properties;
 
 @Configuration
 @ComponentScan(
-        basePackages = {"com.loyofo.spa.webapp"},
+        basePackages = {"com.loyofo.spa"},
         excludeFilters = @Filter(type = FilterType.ANNOTATION, value = Controller.class))
 // 只在声明该注解的上下文内查找 @Transactional 注解,
 // 若定义在 DispatcherServlet 的上下文, 则无法为 spring 应用上下文的 bean 添加事务
@@ -45,7 +45,7 @@ public class RootConfig {
     @Bean
     public DataSource mysqlDs() {
         HikariDataSource ds = new HikariDataSource();
-        ds.setDriverClassName("com.mysql.jdbc.Driver");
+        ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
         ds.setJdbcUrl("jdbc:mysql://47.104.220.222:8063/test?useSSL=false");
         ds.setUsername("luojbin");
         ds.setPassword("luojbin2@Dev");

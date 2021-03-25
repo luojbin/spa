@@ -20,5 +20,13 @@ public class HomeController {
         return "home";
     }
 
+    @RequestMapping(value = "login", method = RequestMethod.GET)
+    public String login() {
+        log.info("顺利进来 login controller");
+        return "login";
+    }
+
+
+
 
 }
